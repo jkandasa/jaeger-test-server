@@ -28,6 +28,8 @@ POST http://localhost:7000/rest/test/simple
  }
 }
 ```
+**Note:** Here `serverHost` and `agentHost` are the Jaeger server/agent hostname or IP address.
+
 Response: 200 OK
 ```json
 {
