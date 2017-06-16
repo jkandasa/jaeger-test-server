@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: jaeger-test-server
+  annotations:
+    openshift.io/display-name: Jaeger Test Server
+    description: This server used to test Jaeger server on openshift environment
+    iconClass: icon-undertow
+    tags: jaeger, test, automation, jaeger-test-server
+parameters:
+- name: JAEGER_TEST_SERVER_IMAGE
+  description: What docker image should be used for jaeger test server.
+  value: jkandasa/jaeger-test-server:latest
+  required: true
+- name: ROUTE_NAME
+  description: Public route with this name will be created.
+  displayName: Route Name
+  value: jaeger-test-services
+  required: true
+- name: ROUTE_HOSTNAME
+  description: Under this hostname the this server will be accessible, if left blank a value will be defaulted.
+  displayName: Hostname
+labels:
+  template: jaeger-test-server
+
+objects:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      description: Exposes and load balances the application pods
+    name: jaeger-test-server
+  spec:
+    ports:
+    - name: http-7000-tcp
+      port: 7000
+      protocol: TCP
+      targetPort: 7000
+    selector:
+      name: jaeger-test-server
+    type: ClusterIP
+- apiVersion: v1
+  kind: Route
+  metadata:
+    name: ${ROUTE_NAME}
+  spec:
+    host: ${ROUTE_HOSTNAME}
+    to:
+      kind: Service
+      name: jaeger-test-server
+    port:
+      targetPort: http-7000-tcp
+
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      description: Defines how to deploy the application server
+    name: jaeger-test-server
+  spec:
+    replicas: 1
+    selector:
+      name: jaeger-test-server
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          name: jaeger-test-server
+      spec:
+        containers:
+        - image: ${JAEGER_TEST_SERVER_IMAGE}
+          imagePullPolicy: IfNotPresent
+          name: jaeger-test-server
+          ports:
+          - containerPort: 7000
+          livenessProbe:
+            httpGet:
+              path: "/rest/ping"
+              port: 7000
+            initialDelaySeconds: 10
+            timeoutSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: "/rest/ping"
+              port: 7000
+            initialDelaySeconds: 10
+            timeoutSeconds: 3
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 12
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+
