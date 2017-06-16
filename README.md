@@ -7,6 +7,16 @@ docker run -d -p 7000:7000 jkandasa/jaeger-test-server
 ```
 
 #### Execute test
+##### Ping to test server:
+GET https://localhost:7000/rest/ping
+Response: 200 OK
+```
+{
+  "hostname" : "jaeger-test-server-1-d1sj0",
+  "timestamp" : 1497617332076
+}
+```
+##### Run a test on Jaeger server
 POST http://localhost:7000/rest/test/simple
 ```
 {
