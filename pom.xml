@@ -22,7 +22,9 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 
+    <app.gui.version>1</app.gui.version>
     <dist.jar.finalName>${project.artifactId}-${project.version}-single</dist.jar.finalName>
+    <dist.finalName>${project.artifactId}-${project.version}</dist.finalName>
 
     <version.ch.qos.logback>1.2.2</version.ch.qos.logback>
     <version.com.uber.jaeger.rest>0.0.1-SNAPSHOT</version.com.uber.jaeger.rest>
@@ -194,6 +196,21 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>attached</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <finalName>${dist.finalName}</finalName>
+          <descriptor>src/main/assembly/binary-deployment.xml</descriptor>
+        </configuration>
       </plugin>
     </plugins>
   </build>

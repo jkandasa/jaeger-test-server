@@ -17,7 +17,7 @@ import org.redhat.qe.jaeger.jaxrs.RestUtils;
  * @author Jeeva Kandasamy (jkandasa)
  * @since 1.0.0
  */
-@Path("/test")
+@Path("/tests")
 @Produces(APPLICATION_JSON)
 @Consumes(APPLICATION_JSON)
 public class ExecuteTestHandler {

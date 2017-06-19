@@ -4,7 +4,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import org.hawkular.client.core.ClientResponse;
-import org.redhat.qe.jaeger.api.model.JAEGER_AGENT;
 import org.redhat.qe.jaeger.api.model.JaegerConfiguration;
 import org.redhat.qe.jaeger.api.model.TestData;
 import org.testng.Assert;
@@ -43,18 +42,21 @@ public class BaseTest {
     private JaegerRestClient restClient = null;
 
     @BeforeSuite
-    @Parameters({ "jaegerServerHost", "jaegerServerPort", "jaegerAgentHost", "jaegerAgentPort", "jaegerAgentType",
-            "flushInterval", "serviceName" })
-    public void updateTestData(ITestContext context, String jaegerServerHost, Integer jaegerServerPort,
-            String jaegerAgentHost, Integer jaegerAgentPort, JAEGER_AGENT jaegerAgentType, Integer flushInterval,
-            String serviceName) {
+    @Parameters({ "jaegerServerHost", "jaegerAgentHost", "jaegerZipkinThriftPort", "jaegerAgentCompactPort",
+            "jaegerAgentBinaryPort", "jaegerZipkinCollectorPort", "jaegerQueryPort", "flushInterval", "serviceName" })
+    public void updateTestData(ITestContext context, String jaegerServerHost, String jaegerAgentHost,
+            Integer jaegerZipkinThriftPort, Integer jaegerAgentCompactPort, Integer jaegerAgentBinaryPort,
+            Integer jaegerZipkinCollectorPort, Integer jaegerQueryPort, Integer flushInterval, String serviceName) {
         testData = TestData.builder()
                 .serviceName(serviceName)
                 .config(JaegerConfiguration.builder()
                         .serverHost(jaegerServerHost)
-                        .serverPort(jaegerServerPort)
-                        .agentHost(jaegerAgentHost).agentPort(jaegerAgentPort)
-                        .agentType(jaegerAgentType)
+                        .agentHost(jaegerAgentHost)
+                        .queryPort(jaegerQueryPort)
+                        .agentZipkinThriftPort(jaegerZipkinThriftPort)
+                        .agentCompactPort(jaegerAgentCompactPort)
+                        .agentBinaryPort(jaegerAgentBinaryPort)
+                        .zipkinCollectorPort(jaegerZipkinCollectorPort)
                         .flushInterval(flushInterval).build())
                 .build();
     }
@@ -71,7 +73,7 @@ public class BaseTest {
         try {
             restClient = JaegerRestClient
                     .builder()
-                    .uri("http://" + testData.getConfig().getServerHost() + ":" + testData.getConfig().getServerPort())
+                    .uri("http://" + testData.getConfig().getServerHost() + ":" + testData.getConfig().getQueryPort())
                     .build();
         } catch (URISyntaxException ex) {
             _logger.error("Exception,", ex);
@@ -83,7 +85,8 @@ public class BaseTest {
         if (tracer != null) {
             return tracer;
         }
-        Sender sender = new UdpSender(testData.getConfig().getAgentHost(), testData.getConfig().getAgentPort(), 1024);
+        Sender sender = new UdpSender(testData.getConfig().getAgentHost(), testData.getConfig()
+                .getAgentCompactPort(), 1024);
         Metrics metrics = new Metrics(new StatsFactoryImpl(new NullStatsReporter()));
         Reporter reporter = new RemoteReporter(sender, testData.getConfig().getFlushInterval(), 100, metrics);
         Sampler sampler = new ProbabilisticSampler(1.0);

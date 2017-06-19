@@ -29,6 +29,7 @@ public class PingHandler {
     public Response ping() throws UnknownHostException {
         return RestUtils.getResponse(Status.OK, Pong.builder()
                 .hostname(InetAddress.getLocalHost().getHostName())
+                .ip(InetAddress.getLocalHost().getHostAddress())
                 .timestamp(System.currentTimeMillis()).build());
     }
 }

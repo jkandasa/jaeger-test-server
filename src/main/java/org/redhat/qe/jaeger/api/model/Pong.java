@@ -11,5 +11,6 @@ import lombok.Getter;
 @Builder
 public class Pong {
     private String hostname;
+    private String ip;
     private Long timestamp;
 }

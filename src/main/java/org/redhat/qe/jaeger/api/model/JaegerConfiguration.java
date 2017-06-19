@@ -15,22 +15,32 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JaegerConfiguration {
     private String serverHost;
-    private Integer serverPort;
-    private JAEGER_AGENT agentType;
     private String agentHost;
-    private Integer agentPort;
+    private Integer queryPort;
+    private Integer agentZipkinThriftPort;
+    private Integer agentCompactPort;
+    private Integer agentBinaryPort;
+    private Integer zipkinCollectorPort;
     private Integer flushInterval;
 
-    public JAEGER_AGENT getAgentType() {
-        return agentType != null ? agentType : JAEGER_AGENT.JAEGER_BINARY;
+    public Integer getAgentZipkinThriftPort() {
+        return agentZipkinThriftPort != null ? agentZipkinThriftPort : 5775;
     }
-
-    public Integer getAgentPort() {
-        return agentPort != null ? agentPort : 5775;
+    
+    public Integer getAgentCompactPort() {
+        return agentCompactPort != null ? agentCompactPort : 6831;
     }
-
-    public Integer getServerPort() {
-        return serverPort != null ? serverPort : 16686;
+    
+    public Integer getAgentBinaryPort() {
+        return agentBinaryPort != null ? agentBinaryPort : 6832;
+    }
+    
+    public Integer getZipkinCollectorPort() {
+        return zipkinCollectorPort != null ? zipkinCollectorPort : 14268;
+    }
+    
+    public Integer getQueryPort() {
+        return queryPort != null ? queryPort : 16686;
     }
 
     public String getServerHost() {

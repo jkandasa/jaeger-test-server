@@ -1,0 +1,244 @@
+/* app css stylesheet */
+
+body {
+  background-color: #f5f5f5;
+  line-height: 1.4;
+  padding-bottom: 20px;
+}
+
+.top-buffer-nm { margin-top:20px; }
+
+.top-buffer-m { margin-top:100px; }
+
+
+.fa-check-circle-o {
+  color: #3f9c35;
+}
+
+.jts-top-space{
+  margin-top: 20px;
+}
+
+.jts-top-space-header{
+  margin-top: 25px;
+}
+
+.jts-top-space-1x{
+  margin-top: 35px;
+}
+
+.jts-top-space-2x{
+  margin-top: 60px;
+}
+
+.jts-bottom-space{
+  margin-bottom: 40px;
+}
+
+.jts-text-red{
+  color: red;
+}
+/*
+.fa-arrow-down {
+  color: #c00;
+}
+*/
+.jts-single-row{
+  white-space: nowrap;
+}
+
+.jts-cards-offset {
+  margin-top: 30px;
+}
+
+.jts-align-center {
+    text-align: center; /* center checkbox horizontally */
+    vertical-align: middle; /* center checkbox vertically */
+}
+
+.jts-table {
+  background-color: #ffffff;
+}
+
+.jts-table > thead > tr > th {
+  background-color: #313131;
+  color: #d0d0d0;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  vertical-align: middle;
+}
+
+.jts-table > tbody > tr > td {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  vertical-align: middle;
+}
+
+.jts-table > tbody > tr:hover > td {
+  cursor: pointer;
+  background-color:#a3c1db;
+}
+
+.jts-table > tbody > tr.jts-selected > td{
+  background-color: #4077a5;
+  color: white;
+}
+
+.jts-table > tbody > tr.jts-selected > td .pficon,
+.jts-table > tbody > tr.jts-selected > td .fa{
+  color: #ffffff;
+}
+
+.jts-form-actions-separator {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 15px;
+  text-align: right;
+}
+
+.jts-urls-list {
+  padding: 0 40px 0 10px;
+}
+
+/* END */
+
+.jts-side-space{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.jts-spinner-container-alone {
+  margin-top: 220px;
+}
+
+
+.navbar-pf {
+  margin-bottom: 10px;
+}
+@media (min-width: 768px) {
+  .navbar-header {
+    padding: 0px 0;
+  }
+  .navbar-pf .navbar-utility > li > a {
+    padding: 12px 10px;
+  }
+  .navbar-pf .navbar-utility li.dropdown > .dropdown-toggle .pficon-user {
+    top: 12px;
+  }
+}
+@media (max-width: 767px) {
+  .navbar-pf {
+    padding-top: 1px;
+  }
+}
+.dropdown-menu li:not(.active) > a:hover:active {
+  background-color: #0099d3;
+}
+
+.jts-form-fixer-left {
+    padding-left:20px;
+    padding-right:5px;
+}
+
+.jts-form-fixer {
+    padding-left:5px;
+    padding-right:5px;
+}
+
+.jts-icon{
+  font-size:15px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.jts-icon{
+  font-size:100%;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.jts-icon-md-1{
+  font-size:110%;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.jts-icon-md-3{
+  font-size:130%;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.jts-icon-lg{
+  font-size:150%;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.jts-icon-2x{
+  font-size:200%;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.jts-inline-editer-ab{
+  color: #000000;
+  cursor: pointer;
+  font-style:initial;
+  border-bottom: initial;
+}
+
+.jts-inline-editer-ab:hover{
+  color: #428bca;
+  font-style:initial;
+}
+
+.jts-style-ab{
+  font-weight: 500;
+  font-size: 130%;
+  color:initial;
+}
+
+.jts-show-disabled{
+  background-color: #ffffff !important;
+  color: #333 !important;
+}
+
+.jts-margin-right{
+  margin-right: 8px;
+}
+
+.jts-margin-left{
+  margin-right: 8px;
+}
+
+.jts-margin-icon{
+  margin-right: 3px;
+}
+
+.jts-v-margin > div {
+  padding:0 20px;
+}
+
+.jts-padding {
+  padding-left:5px;
+  padding-right:5px;
+}
+
+.jts-margin {
+  margin-left:3px;
+  margin-right:3px;
+}
+
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.jts-pointer{
+  cursor: pointer;
+}

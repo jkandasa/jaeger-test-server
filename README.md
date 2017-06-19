@@ -17,13 +17,13 @@ Response: 200 OK
 }
 ```
 ##### Run a test on Jaeger server
-POST http://localhost:7000/rest/test/simple
+POST http://localhost:7000/rest/tests/simple
 ```json
 {
   "serviceName":"fromdocker",
   "config":{
     "serverHost": "localhost",
-    "serverPort": 80,
+    "queryPort": 80,
     "agentHost": "localhost"
  }
 }

@@ -1,0 +1,115 @@
+<div class="container-fluid  jts-top-space-1x"> <!-- Container-fluid -->
+
+
+  <div> <!-- Main Message -->
+
+    <!-- Page Header -->
+    <div ng-include src="'partials/common-html/header-add-update.html'"></div>
+
+    <div>
+      <form class="form-horizontal" name="jtsForm">
+        <div class="col-md-5">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Service name</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="service-xyz" ng-model="testData.serviceName" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Test parameters</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="{'tag-1': 'abc', 'host': 'local.host'}" ng-model="testParameters" pf-validation="cs.isJsonString(input)" required />
+              <span class="help-block">Syntax error</span>
+            </div>
+          </div>
+
+          <legend>Jaeger</legend>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Server host</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="localhost" ng-model="testData.config.serverHost" pf-validation="cs.isContainsSpace(input)" required />
+              <span class="help-block">Space not allowed</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Agent host</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="localhost" ng-model="testData.config.agentHost" pf-validation="cs.isContainsSpace(input)" required />
+              <span class="help-block">Space not allowed</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Query port</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="16686" ng-model="testData.config.queryPort" pf-validation="cs.isNumber(input)" required />
+              <span class="help-block">Invalid port</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Agent Zipkin thrift port</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="5775" ng-model="testData.config.agentZipkinThriftPort" pf-validation="cs.isNumber(input)" required />
+              <span class="help-block">Invalid port</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Agent Jaeger compact port</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="6831" ng-model="testData.config.agentCompactPort" pf-validation="cs.isNumber(input)" required />
+              <span class="help-block">Invalid port</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Agent Jaeger binary port</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="6832" ng-model="testData.config.agentBinaryPort" pf-validation="cs.isNumber(input)" required />
+              <span class="help-block">Invalid port</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Zipkin collector port</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="14268" ng-model="testData.config.zipkinCollectorPort" pf-validation="cs.isNumber(input)" required />
+              <span class="help-block">Invalid port</span>
+            </div>
+          </div>
+
+          <!-- Include save form buttons -->
+          <div ng-include src="'partials/common-html/save-form.html'"></div>
+        </div>
+      </form>
+    </div>
+    <!-- Tests result-->
+    <div ng-if="testsResult">
+      <legend>Execution status</legend>
+      <div class="col-sm-10">
+        <div ng-if="testsResult">
+          <div class="col-lg-12">
+            <div class="card-pf">
+              <div class="card-pf-body">
+                <legend><small><small>Quick view</small></small></legend>
+                  <dl class="dl-horizontal"  ng-if="executionStatus">
+                    <dt ng-class="testsResult.count.passed > 0 ? 'text-success' : 'text-default'">Passed</dt> <dd ng-class="testsResult.count.passed > 0 ? 'text-success' : 'text-default'">{{testsResult.count.passed}}</dd>
+                    <dt ng-class="testsResult.count.failed > 0 ? 'text-danger' : 'text-default'">Failed</dt> <dd ng-class="testsResult.count.failed > 0 ? 'text-danger' : 'text-default'">{{testsResult.count.failed}}</dd>
+                    <dt ng-class="testsResult.count.skipped > 0 ? 'text-warning' : 'text-default'">Skipped</dt> <dd ng-class="testsResult.count.skipped > 0 ? 'text-warning' : 'text-default'">{{testsResult.count.skipped}}</dd>
+                    <dt ng-class="testsResult.count.configurationFailures > 0 ? 'text-danger' : 'text-default'">Configuration failures</dt> <dd ng-class="testsResult.count.configurationFailures > 0 ? 'text-danger' : 'text-default'">{{testsResult.count.configurationFailures}}</dd>
+                    <dt ng-class="testsResult.count.configurationSkips > 0 ? 'text-warning' : 'text-default'">Configuration skips</dt> <dd ng-class="testsResult.count.configurationSkips > 0 ? 'text-warning' : 'text-default'">{{testsResult.count.configurationSkips}}</dd>
+                  </dl>
+              <legend><small><small>Raw</small></small></legend>
+              <pre class="pre-scrollable">{{testsResultString}}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- Main Message -->
+</div> <!-- container -->

@@ -30,10 +30,12 @@ public class TestEngineApi {
     private Map<String, String> getSuiteParameters(TestData testData) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("jaegerServerHost", testData.getConfig().getServerHost());
-        map.put("jaegerServerPort", String.valueOf(testData.getConfig().getServerPort()));
         map.put("jaegerAgentHost", testData.getConfig().getAgentHost());
-        map.put("jaegerAgentPort", String.valueOf(testData.getConfig().getAgentPort()));
-        map.put("jaegerAgentType", testData.getConfig().getAgentType().name());
+        map.put("jaegerZipkinThriftPort", String.valueOf(testData.getConfig().getAgentZipkinThriftPort()));
+        map.put("jaegerAgentCompactPort", String.valueOf(testData.getConfig().getAgentCompactPort()));
+        map.put("jaegerAgentBinaryPort", String.valueOf(testData.getConfig().getAgentBinaryPort()));
+        map.put("jaegerZipkinCollectorPort", String.valueOf(testData.getConfig().getZipkinCollectorPort()));
+        map.put("jaegerQueryPort", String.valueOf(testData.getConfig().getQueryPort()));
         map.put("flushInterval", String.valueOf(testData.getConfig().getFlushInterval()));
         map.put("serviceName", String.valueOf(testData.getServiceName()));
         return map;
