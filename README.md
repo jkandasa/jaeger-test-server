@@ -1,12 +1,46 @@
-# jaeger-test-server
-This server used to test Jaeger server
+# Jaeger test server
+[Jaeger](https://github.com/uber/jaeger) is a distributed tracing system by [Uber Technologies](http://uber.github.io/). We can run [Jaeger](https://github.com/uber/jaeger) on [Docker](https://www.docker.io), [OpenShift](https://openshift.io/) or in standalone machine. When we go Docker or OpenShift environment, we have to access Jaeger from inside of the environment to run our tests. To run tests easier on any environment this project born. We can use this project on any environment(standalone, docker, OpenShift) ti run tests. This project is running on top of [Untertow](http://undertow.io/) web server. Test runs with the help of [TestNG](http://testng.org/doc/) testing framework.
 
-#### Docker image
+#### Run this server on Docker continer
 ```bash
 docker run -d -p 7000:7000 jkandasa/jaeger-test-server
 ```
 
+#### Run this server on standalone machine
+Download latest version from [releases page](https://github.com/Hawkular-QE/jaeger-test-server/releases).
+```bash
+$ tar xzf jaeger-test-server-*-single.tar.gz
+$ cd jts
+$ bin/start.sh
+```
+#### Run this server on OpenShift
+```bash
+oc process -f https://raw.githubusercontent.com/Hawkular-QE/jaeger-test-server/master/openshift-jaeger-test-server-template.yaml | oc create -f -
+```
+##### To delete from OpenShift
+```bash
+oc delete all -l app=jaeger-test-server
+```
+
 #### Execute test
+To perform tests this server should be running either one of deployment option. We can run tests from UI as well as from REST API.
+
+#### Run tests from UI
+This server has it own UI to perform actions without additional tools.
+
+About page shows details of this server.
+![About page](doc/images/jts-ui-about.png "JTS about page")
+
+
+Simple tests pages used to run simple tests on Jaeger server. We have to provide Jaeger server details and click on `Execute`. Once execution completed we can get the execution status as shown in this image.
+
+We can pass any number of `Test parameters` as JSON format. These paramaters will be used on all the tests.
+![Simple tests page](doc/images/jts-ui-tests-simple.png "JTS simple tests page")
+
+
+#### Run tests from REST API
+Sometimes we may need to perform tests from maven or programetically. For this case we can use REST API calls.
+
 ##### Ping to test server:
 GET https://localhost:7000/api/ping
 Response: 200 OK
@@ -62,4 +96,26 @@ Response: 200 OK
   "falied" : [ ],
   "skipped" : [ ]
 }
+```
+
+### Where to add new tests?
+All tests are performed with TessNG testing framework. We can add any number of tests on [Tests directory](src/main/java/org/redhat/qe/jaeger/tests).
+
+### Create/compile package from source
+```bash
+$ git clone https://github.com/Hawkular-QE/jaeger-test-server
+$ cd jaeger-test-server
+$ mvn clean package
+```
+
+### Extra
+#### To build, tag, push docker image
+```bash
+$ cd jaeger-test-server
+$ mvn clean package
+$ cd target
+$ tar xzf jaeger-test-server-*-bundle.tar.gz
+$ sudo docker build -t jaeger-test-server .
+$ sudo docker tag jaeger-test-server jkandasa/jaeger-test-server:latest
+$ sudo docker push jkandasa/jaeger-test-server:latest
 ```
