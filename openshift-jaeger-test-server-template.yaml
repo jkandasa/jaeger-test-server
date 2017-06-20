@@ -70,7 +70,7 @@ objects:
       spec:
         containers:
         - image: ${JAEGER_TEST_SERVER_IMAGE}
-          imagePullPolicy: always
+          imagePullPolicy: Always
           name: jaeger-test-server
           ports:
           - containerPort: 7000
