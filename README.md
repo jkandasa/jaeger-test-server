@@ -104,6 +104,7 @@ Response: 200 OK
 All tests are performed with TessNG testing framework. We can add any number of tests on [Tests directory](src/main/java/org/redhat/qe/jaeger/tests).
 
 ### Create/compile package from source
+This project is depends on [jaeger-rest-client-java](https://github.com/Hawkular-QE/jaeger-rest-client-java). You have to local install (`mvn install`) jaeger-rest-client-java.
 ```bash
 $ git clone https://github.com/Hawkular-QE/jaeger-test-server
 $ cd jaeger-test-server
