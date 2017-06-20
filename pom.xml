@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.redhat.qe</groupId>
   <artifactId>jaeger-test-server</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1</version>
 
   <name>Jaeger qe test server</name>
   <description>Used to test Jaeger server/agent</description>

@@ -6,4 +6,4 @@ USER jaeger
 WORKDIR /jts
 COPY ./target/jts .
 EXPOSE 7000
-CMD ["java", "-Dlogback.configurationFile=conf/logback-docker.xml", "-DuseDefaultListeners=false", "-jar", "lib/jaeger-test-server-1.0.0-SNAPSHOT-single.jar"]
+CMD ["java", "-Dlogback.configurationFile=conf/logback-docker.xml", "-DuseDefaultListeners=false", "-jar", "lib/jaeger-test-server-1.0.1-single.jar"]
