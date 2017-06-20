@@ -28,6 +28,8 @@ To perform tests this server should be running either one of deployment option. 
 #### Run tests from UI
 This server has it own UI to perform actions without additional tools.
 
+Launch UI on http://localhost:7000
+
 About page shows details of this server.
 ![About page](doc/images/jts-ui-about.png "JTS about page")
 
