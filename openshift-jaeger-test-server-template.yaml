@@ -70,19 +70,19 @@ objects:
       spec:
         containers:
         - image: ${JAEGER_TEST_SERVER_IMAGE}
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: always
           name: jaeger-test-server
           ports:
           - containerPort: 7000
           livenessProbe:
             httpGet:
-              path: "/rest/ping"
+              path: "/api/ping"
               port: 7000
             initialDelaySeconds: 10
             timeoutSeconds: 3
           readinessProbe:
             httpGet:
-              path: "/rest/ping"
+              path: "/api/ping"
               port: 7000
             initialDelaySeconds: 10
             timeoutSeconds: 3
