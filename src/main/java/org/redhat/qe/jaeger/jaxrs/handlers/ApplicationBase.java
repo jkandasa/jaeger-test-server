@@ -28,6 +28,7 @@ public class ApplicationBase extends Application {
         //resources
         resources.add(PingHandler.class);
         resources.add(ExecuteTestHandler.class);
+        resources.add(UtilsHandler.class);
 
         //providers
         resources.add(ApplicationExceptionMapper.class);

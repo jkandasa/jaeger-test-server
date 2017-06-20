@@ -1,5 +1,7 @@
 package org.redhat.qe.jaeger.api.model;
 
+import lombok.ToString;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class JaegerConfiguration {
     private String serverHost;
     private String agentHost;

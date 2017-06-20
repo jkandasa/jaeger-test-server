@@ -3,6 +3,8 @@ package org.redhat.qe.jaeger.api.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.ToString;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class TestData {
     private JaegerConfiguration config;
     private String serviceName;

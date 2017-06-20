@@ -1,10 +1,18 @@
 jtsModule.controller('UtilsAboutController', function(alertService,
-$scope, $filter, UtilsFactory, $uibModal, $stateParams, displayRestError) {
-
-  //GUI page settings
-  $scope.headerStringList = "About";
-
+$scope, $filter, RootFactory, $uibModal, $stateParams, displayRestError) {
   //Ping Status
-  $scope.pingStatus = UtilsFactory.about();
+  $scope.pingStatus = RootFactory.about();
+});
 
+jtsModule.controller('UtilsEnvironmentController', function(alertService,
+$scope, $filter, UtilsFactory, $uibModal, $stateParams, displayRestError) {
+  //Environment details
+  $scope.jtsEnvironment = UtilsFactory.environment();
+});
+
+
+jtsModule.controller('UtilsJvmPropertiesController', function(alertService,
+$scope, $filter, UtilsFactory, $uibModal, $stateParams, displayRestError) {
+  //Properties details
+  $scope.jvmProperties = UtilsFactory.properties();
 });

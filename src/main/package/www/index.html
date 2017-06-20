@@ -162,8 +162,9 @@
               <i class="fa fa-life-ring fa-lg"></i> Support <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="https://github.com/Hawkular-QE/jaeger-test-server"><i class="fa fa-book fa-lg"></i> Documents</a></li>
+              <li><a href="https://github.com/Hawkular-QE/jaeger-test-server/blob/master/README.md"><i class="fa fa-book fa-lg"></i> Documents</a></li>
               <li><a href="https://github.com/Hawkular-QE/jaeger-test-server"><i class="fa fa-github fa-lg"></i> Source code</a></li>
+              <li><a href="https://github.com/Hawkular-QE/jaeger-test-server/issues"><i class="fa fa-bug fa-lg"></i> Issues</a></li>
             </ul>
           </li>
 
@@ -183,6 +184,8 @@
             <a ui-sref="utilsAbout"><i class="fa fa-cube fa-lg"></i> Utils</a>
             <ul class="nav navbar-nav navbar-persistent">
               <li ng-class="{ active: $state.current.name.indexOf('utilsAbout') == 0 }"><a ui-sref="utilsAbout"><i class="fa fa-info-circle fa-lg"></i> About</a></li>
+              <li ng-class="{ active: $state.current.name.indexOf('utilsEnvironment') == 0 }"><a ui-sref="utilsEnvironment"><i class="fa fa-file-text-o fa-lg"></i> Environment</a></li>
+              <li ng-class="{ active: $state.current.name.indexOf('utilsJvmProperties') == 0 }"><a ui-sref="utilsJvmProperties"><i class="fa fa-file-text-o fa-lg"></i> JVM Properties</a></li>
             </ul>
           </li>
 

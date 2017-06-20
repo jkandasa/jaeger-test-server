@@ -1,5 +1,7 @@
 package org.redhat.qe.jaeger.api.model;
 
+import lombok.ToString;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -9,6 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @Builder
+@ToString
 public class ApiError {
     private String code;
     private String error;

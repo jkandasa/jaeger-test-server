@@ -23,7 +23,6 @@ import org.redhat.qe.jaeger.jaxrs.RestUtils;
 @Produces(APPLICATION_JSON)
 @Consumes(APPLICATION_JSON)
 public class PingHandler {
-
     @GET
     @Path("ping")
     public Response ping() throws UnknownHostException {

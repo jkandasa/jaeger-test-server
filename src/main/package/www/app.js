@@ -56,6 +56,20 @@ jtsModule.config(function($stateProvider, $urlRouterProvider) {
        data: {
         requireLogin: false
       }
+    }).state('utilsEnvironment', {
+      url:"/utils/environemnt",
+      templateUrl: "partials/utils/environment.html?avc=${app.gui.version}",
+      controller: "UtilsEnvironmentController",
+       data: {
+        requireLogin: false
+      }
+    }).state('utilsJvmProperties', {
+      url:"/utils/jvmproperties",
+      templateUrl: "partials/utils/jvm-properties.html?avc=${app.gui.version}",
+      controller: "UtilsJvmPropertiesController",
+       data: {
+        requireLogin: false
+      }
     })
 });
 
