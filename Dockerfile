@@ -3,7 +3,7 @@ MAINTAINER Jeeva Kandasamy(jkandasa)
 
 RUN adduser -D -u 7000 jaeger
 USER jaeger
-WORKDIR /app
-COPY ./target/jaeger-test-server-1.0.0-SNAPSHOT-single.jar .
+WORKDIR /jts
+COPY ./target/jts .
 EXPOSE 7000
-CMD ["java","-jar", "jaeger-test-server-1.0.0-SNAPSHOT-single.jar"]
+CMD ["java", "-Dlogback.configurationFile=conf/logback-docker.xml", "-DuseDefaultListeners=false", "-jar", "lib/jaeger-test-server-1.0.0-SNAPSHOT-single.jar"]

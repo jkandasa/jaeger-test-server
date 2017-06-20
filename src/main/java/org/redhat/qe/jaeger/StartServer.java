@@ -20,7 +20,7 @@ public class StartServer {
     public static void main(String[] args) {
         UndertowJaxrsServer server = new UndertowJaxrsServer();
         try {
-            server.deploy(ApplicationBase.class, "/rest");
+            server.deploy(ApplicationBase.class, "/api");
             Undertow.Builder serverBuilder = Undertow.builder().addHttpListener(7000, "0.0.0.0");
             String wwwLocation = Utils.getWWW();
             _logger.debug("www location:{}", wwwLocation);

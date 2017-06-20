@@ -1,5 +1,20 @@
 <configuration scan="true" scanPeriod="2 minutes">
 
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <encoder>
+      <pattern>%date %level [%thread] [%logger:%line] %msg%n</pattern>
+    </encoder>
+    <file>../logs/jts.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <FileNamePattern>../logs/jts_%i.log.zip</FileNamePattern>
+      <MinIndex>1</MinIndex>
+      <MaxIndex>5</MaxIndex>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>1MB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
       <pattern>%date %level [%thread] [%logger:%line] %msg%n</pattern>
@@ -7,10 +22,12 @@
   </appender>
 
   <logger level="INFO" name="org.apache.http" />
+  <logger level="WARN" name="org.jboss.resteasy" />
   <logger level="INFO" name="org.jboss.resteasy.core" />
+  <logger level="INFO" name="org.xnio.nio" />
   <logger level="DEBUG" name="org.redhat.qe.jaeger" />
-  
+
   <root level="DEBUG">
-    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
   </root>
 </configuration>

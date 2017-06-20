@@ -83,9 +83,16 @@ public class TestEngineApi {
 
         //Set the list of Suites to the testNG object you created earlier.
         testng.setXmlSuites(mySuites);
+        testng.setUseDefaultListeners(useDefaultListeners()); // Enable/Disable default "test-output" directory
         testng.run();
         return TestResult.get(tla);
+    }
 
+    private boolean useDefaultListeners() {
+        if (System.getProperty("useDefaultListeners") != null) {
+            return Boolean.valueOf(System.getProperty("useDefaultListeners"));
+        }
+        return true;
     }
 
 }

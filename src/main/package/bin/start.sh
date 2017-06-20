@@ -8,7 +8,7 @@ cd ${ACTUAL_LOCATION}
 
 #Java Heap settings
 HEAP_MIN=-Xms4m
-HEAP_MAX=-Xmx12m
+HEAP_MAX=-Xmx64m
 
 JAVA_VERSION="1.7"
 
@@ -32,7 +32,7 @@ if [[ "$_java" ]]; then
         then
           echo "JTS server is already running on pid[${MC_PID}]"
         else
-          $_java ${HEAP_MIN} ${HEAP_MAX} -Dlogback.configurationFile=${CONF_LOG_FILE} -cp "../lib/*" org.redhat.qe.jaeger.StartServer &
+          $_java ${HEAP_MIN} ${HEAP_MAX} -Dlogback.configurationFile=${CONF_LOG_FILE} -cp "../lib/*" org.redhat.qe.jaeger.StartServer >> ../logs/jts.log 2>&1 &
           echo 'Start issued for JTS'
         fi
     else

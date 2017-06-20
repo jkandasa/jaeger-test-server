@@ -8,7 +8,7 @@ docker run -d -p 7000:7000 jkandasa/jaeger-test-server
 
 #### Execute test
 ##### Ping to test server:
-GET https://localhost:7000/rest/ping
+GET https://localhost:7000/api/ping
 Response: 200 OK
 ```json
 {
@@ -17,7 +17,7 @@ Response: 200 OK
 }
 ```
 ##### Run a test on Jaeger server
-POST http://localhost:7000/rest/tests/simple
+POST http://localhost:7000/api/tests/simple
 ```json
 {
   "serviceName":"fromdocker",

@@ -26,8 +26,11 @@ public class Utils {
     public static String getWWW() {
         if (FileUtils.getFile("../www").exists()) {
             return FileUtils.getFile("../www").getAbsolutePath();
+        } else if (FileUtils.getFile("www").exists()) {
+            return FileUtils.getFile("www").getAbsolutePath();
         } else {
             return FileUtils.getFile("src/main/package/www").getAbsolutePath();
         }
     }
+    
 }
