@@ -55,21 +55,33 @@ public class BaseTest {
                 .serviceName(serviceName)
                 .config(JaegerConfiguration
                         .builder()
-                        .serverHost(jaegerServerHost == null ? System.getenv("JAEGER_SERVICE_HOST") : jaegerServerHost)
-                        .agentHost(jaegerAgentHost == null ? System.getenv("JAEGER_SERVICE_HOST") : jaegerAgentHost)
-                        .queryPort(jaegerQueryPort == null ? Integer.valueOf(System
-                                .getenv("JAEGER_SERVICE_PORT_AGENT_ZIPKIN_THRIFT")) : jaegerQueryPort)
-                        .agentZipkinThriftPort(jaegerZipkinThriftPort == null ? Integer.valueOf(System
-                                .getenv("JAEGER_SERVICE_PORT_AGENT_COMPACT")) : jaegerZipkinThriftPort)
+                        .serverHost(jaegerServerHost == null ?
+                                getEnv("JAEGER_SERVICE_HOST", "localhost") : jaegerServerHost)
+                        .agentHost(jaegerAgentHost == null ?
+                                getEnv("JAEGER_SERVICE_HOST", "localhost") : jaegerAgentHost)
+                        .queryPort(jaegerQueryPort == null ?
+                                Integer.valueOf(getEnv("JAEGER_SERVICE_PORT_QUERY_HTTP", "16686")) : jaegerQueryPort)
+                        .agentZipkinThriftPort(jaegerZipkinThriftPort == null ?
+                                Integer.valueOf(getEnv("JAEGER_SERVICE_PORT_AGENT_ZIPKIN_THRIFT", "5775"))
+                                : jaegerZipkinThriftPort)
                         .agentCompactPort(jaegerAgentCompactPort == null ?
-                                Integer.valueOf(System.getenv("JAEGER_SERVICE_PORT_AGENT_BINARY"))
+                                Integer.valueOf(getEnv("JAEGER_SERVICE_PORT_AGENT_COMPACT", "6831"))
                                 : jaegerAgentCompactPort)
-                        .agentBinaryPort(jaegerAgentBinaryPort == null ? Integer.valueOf(System
-                                .getenv("JAEGER_SERVICE_PORT_AGENT_BINARY")) : jaegerAgentBinaryPort)
-                        .zipkinCollectorPort(jaegerZipkinCollectorPort == null ? Integer.valueOf(System
-                                .getenv("JAEGER_SERVICE_PORT_QUERY_HTTP")) : jaegerZipkinCollectorPort)
+                        .agentBinaryPort(jaegerAgentBinaryPort == null ?
+                                Integer.valueOf(getEnv("JAEGER_SERVICE_PORT_AGENT_BINARY", "6832"))
+                                : jaegerAgentBinaryPort)
+                        .zipkinCollectorPort(jaegerZipkinCollectorPort == null ?
+                                Integer.valueOf(getEnv("JAEGER_SERVICE_PORT_AGENT_ZIPKIN_THRIFT", "14268"))
+                                : jaegerZipkinCollectorPort)
                         .flushInterval(flushInterval).build())
                 .build();
+    }
+
+    private String getEnv(String key, String defaultValue) {
+        if (System.getenv(key) != null) {
+            return System.getenv(key);
+        }
+        return defaultValue;
     }
 
     @BeforeMethod
