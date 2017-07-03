@@ -11,6 +11,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import com.uber.jaeger.metrics.Metrics;
@@ -44,19 +45,29 @@ public class BaseTest {
     @BeforeSuite
     @Parameters({ "jaegerServerHost", "jaegerAgentHost", "jaegerZipkinThriftPort", "jaegerAgentCompactPort",
             "jaegerAgentBinaryPort", "jaegerZipkinCollectorPort", "jaegerQueryPort", "flushInterval", "serviceName" })
-    public void updateTestData(ITestContext context, String jaegerServerHost, String jaegerAgentHost,
-            Integer jaegerZipkinThriftPort, Integer jaegerAgentCompactPort, Integer jaegerAgentBinaryPort,
-            Integer jaegerZipkinCollectorPort, Integer jaegerQueryPort, Integer flushInterval, String serviceName) {
-        testData = TestData.builder()
+    public void updateTestData(ITestContext context, @Optional String jaegerServerHost,
+            @Optional String jaegerAgentHost, @Optional Integer jaegerZipkinThriftPort,
+            @Optional Integer jaegerAgentCompactPort, @Optional Integer jaegerAgentBinaryPort,
+            @Optional Integer jaegerZipkinCollectorPort, @Optional Integer jaegerQueryPort,
+            @Optional Integer flushInterval, @Optional String serviceName) {
+        testData = TestData
+                .builder()
                 .serviceName(serviceName)
-                .config(JaegerConfiguration.builder()
-                        .serverHost(jaegerServerHost)
-                        .agentHost(jaegerAgentHost)
-                        .queryPort(jaegerQueryPort)
-                        .agentZipkinThriftPort(jaegerZipkinThriftPort)
-                        .agentCompactPort(jaegerAgentCompactPort)
-                        .agentBinaryPort(jaegerAgentBinaryPort)
-                        .zipkinCollectorPort(jaegerZipkinCollectorPort)
+                .config(JaegerConfiguration
+                        .builder()
+                        .serverHost(jaegerServerHost == null ? System.getenv("JAEGER_SERVICE_HOST") : jaegerServerHost)
+                        .agentHost(jaegerAgentHost == null ? System.getenv("JAEGER_SERVICE_HOST") : jaegerAgentHost)
+                        .queryPort(jaegerQueryPort == null ? Integer.valueOf(System
+                                .getenv("JAEGER_SERVICE_PORT_AGENT_ZIPKIN_THRIFT")) : jaegerQueryPort)
+                        .agentZipkinThriftPort(jaegerZipkinThriftPort == null ? Integer.valueOf(System
+                                .getenv("JAEGER_SERVICE_PORT_AGENT_COMPACT")) : jaegerZipkinThriftPort)
+                        .agentCompactPort(jaegerAgentCompactPort == null ?
+                                Integer.valueOf(System.getenv("JAEGER_SERVICE_PORT_AGENT_BINARY"))
+                                : jaegerAgentCompactPort)
+                        .agentBinaryPort(jaegerAgentBinaryPort == null ? Integer.valueOf(System
+                                .getenv("JAEGER_SERVICE_PORT_AGENT_BINARY")) : jaegerAgentBinaryPort)
+                        .zipkinCollectorPort(jaegerZipkinCollectorPort == null ? Integer.valueOf(System
+                                .getenv("JAEGER_SERVICE_PORT_QUERY_HTTP")) : jaegerZipkinCollectorPort)
                         .flushInterval(flushInterval).build())
                 .build();
     }
