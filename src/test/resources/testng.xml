@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Carmatch MX tests" verbose="1">
+  <parameter name="flushInterval" value="100" />
+  <parameter name="serviceName" value="from-automation" />
+  <test name="Quick tests">
+    <classes>
+      <class name="org.redhat.qe.jaeger.tests.SimpleSpanTest" />
+    </classes>
+  </test>
+</suite>
